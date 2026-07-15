@@ -1,0 +1,165 @@
+@import "tailwindcss";
+
+/* ============ Slice-A-Word design system (Duolingo-style) ============ */
+
+:root {
+  --duo-green: #58cc02;
+  --duo-green-dark: #46a302;
+  --duo-blue: #1cb0f6;
+  --duo-blue-dark: #1899d6;
+  --duo-yellow: #ffc800;
+  --duo-red: #ff4b4b;
+  --duo-text: #4b4b4b;
+  --duo-text-2: #777777;
+  --duo-muted: #afafaf;
+  --duo-border: #e5e5e5;
+  --duo-sel-bg: #ddf4ff;
+  --duo-sel-border: #84d8ff;
+  --duo-sel-text: #1899d6;
+}
+
+body {
+  font-family: "Nunito", ui-rounded, "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--duo-text);
+  background: #ffffff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--duo-blue);
+  outline-offset: 2px;
+}
+
+/* --- 3D press buttons (the signature) --- */
+.duo-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  font-size: 0.9375rem;
+  border-radius: 1rem;
+  padding: 0.875rem 1.5rem;
+  border: 2px solid transparent;
+  cursor: pointer;
+  user-select: none;
+  transform: translateY(0);
+  transition: filter 0.15s;
+}
+.duo-btn:hover { filter: brightness(1.04); }
+.duo-btn:active {
+  transform: translateY(4px);
+  box-shadow: none !important;
+}
+.duo-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+.duo-btn-green { background: var(--duo-green); color: #fff; box-shadow: 0 4px 0 var(--duo-green-dark); }
+.duo-btn-blue  { background: var(--duo-blue);  color: #fff; box-shadow: 0 4px 0 var(--duo-blue-dark); }
+.duo-btn-white {
+  background: #fff;
+  color: var(--duo-blue);
+  border-color: var(--duo-border);
+  box-shadow: 0 4px 0 var(--duo-border);
+}
+.duo-btn-hero {
+  background: #fff;
+  color: #58a700;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* --- cards --- */
+.duo-card {
+  background: #fff;
+  border: 2px solid var(--duo-border);
+  border-radius: 1.25rem;
+}
+
+/* --- selectable option tiles --- */
+.duo-tile {
+  display: block;
+  background: #fff;
+  border: 2px solid var(--duo-border);
+  border-radius: 1rem;
+  padding: 0.875rem 1rem;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+}
+.duo-tile:hover { background: #f7f7f7; }
+.duo-tile.selected {
+  background: var(--duo-sel-bg);
+  border-color: var(--duo-sel-border);
+}
+.duo-tile.selected .duo-tile-title { color: var(--duo-sel-text); }
+.duo-tile:focus-within {
+  outline: 2px solid var(--duo-blue);
+  outline-offset: 2px;
+}
+.duo-tile-title {
+  display: block;
+  font-weight: 800;
+  font-size: 0.9375rem;
+  color: var(--duo-text);
+}
+.duo-tile-desc {
+  display: block;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  color: var(--duo-text-2);
+  margin-top: 0.125rem;
+}
+
+/* --- section labels (eyebrows) --- */
+.duo-label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--duo-muted);
+}
+
+/* --- inputs --- */
+.duo-input {
+  width: 100%;
+  border: 2px solid var(--duo-border);
+  border-radius: 0.875rem;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  background: #f7f7f7;
+  outline: none;
+  transition: border-color 0.12s, background 0.12s;
+}
+.duo-input:focus {
+  border-color: var(--duo-blue);
+  background: #fff;
+}
+.duo-input::placeholder { color: var(--duo-muted); font-weight: 600; }
+
+/* --- progress bar (audio warm-up) --- */
+.duo-progress {
+  height: 1rem;
+  background: var(--duo-border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.duo-progress > div {
+  height: 100%;
+  background: var(--duo-green);
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+/* --- gentle fruit bob --- */
+@keyframes duo-bob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+.duo-bob { animation: duo-bob 2.4s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .duo-bob { animation: none; }
+  .duo-btn:active { transform: none; }
+}
